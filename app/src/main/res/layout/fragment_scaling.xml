@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RadioGroup
+        android:id="@+id/scalingGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioFitScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fit Screen" />
+
+        <RadioButton
+            android:id="@+id/radioAspectRatio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maintain Aspect Ratio" />
+
+        <RadioButton
+            android:id="@+id/radioPixelPerfect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pixel Perfect" />
+
+    </RadioGroup>
+
+</LinearLayout>

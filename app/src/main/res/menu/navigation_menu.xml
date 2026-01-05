@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_save_states"
+        android:title="Save States" />
+    <item
+        android:id="@+id/nav_cheats"
+        android:title="Cheats" />
+    <item
+        android:id="@+id/nav_scaling"
+        android:title="Scaling" />
+</menu>

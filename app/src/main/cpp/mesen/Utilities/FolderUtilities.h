@@ -1,0 +1,36 @@
+#pragma once
+
+#include "stdafx.h"
+#include <unordered_set>
+
+class FolderUtilities
+{
+private:
+	static string _homeFolder;
+	static string _saveFolderOverride;
+	static string _saveStateFolderOverride;
+	static vector<string> _gameFolders;
+
+public:
+	static void SetHomeFolder(string homeFolder);
+	static string GetHomeFolder();
+
+	static void SetFolderOverrides(string saveFolder, string saveStateFolder, string screenshotFolder);
+
+	static void AddKnownGameFolder(string gameFolder);
+	static vector<string> GetKnownGameFolders();
+
+	static string GetSaveFolder();
+	static string GetSaveStateFolder();
+	static string GetHdPackFolder();
+
+	static vector<string> GetFolders(string rootFolder);
+	static vector<string> GetFilesInFolder(string rootFolder, std::unordered_set<string> extensions, bool recursive);
+
+	static string GetFilename(string filepath, bool includeExtension);
+	static string GetFolderName(string filepath);
+
+	static void CreateFolder(string folder);
+
+	static string CombinePath(string folder, string filename);
+};
