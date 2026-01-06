@@ -43,6 +43,10 @@
 
 static retro_log_printf_t logCallback = nullptr;
 retro_environment_t env_cb = nullptr;
+static retro_video_refresh_t _videoCallback = nullptr;
+static retro_audio_sample_batch_t _audioCallback = nullptr;
+static retro_input_poll_t _pollInput = nullptr;
+static retro_input_state_t _getInputState = nullptr;
 static unsigned _inputDevices[5] = { DEVICE_AUTO, DEVICE_AUTO, DEVICE_AUTO, DEVICE_AUTO, DEVICE_AUTO };
 static bool _hdPacksEnabled = false;
 static string _mesenVersion = "";
@@ -119,6 +123,20 @@ extern "C" {
 
 		_keyManager.reset(new LibretroKeyManager(_console));
 		_messageManager.reset(new LibretroMessageManager(logCallback, env_cb));
+
+		// Set callbacks now that _console and _keyManager are initialized
+		if (_videoCallback) {
+			_console->GetVideoRenderer()->SetVideoCallback(_videoCallback);
+		}
+		if (_audioCallback) {
+			_console->GetSoundMixer()->SetSendAudioSample(_audioCallback);
+		}
+		if (_pollInput) {
+			_keyManager->SetPollInput(_pollInput);
+		}
+		if (_getInputState) {
+			_keyManager->SetGetInputState(_getInputState);
+		}
 
 		std::stringstream databaseData;
 		databaseData.write((const char*)MesenDatabase, sizeof(MesenDatabase));
@@ -227,7 +245,7 @@ extern "C" {
 
 	RETRO_API void retro_set_video_refresh(retro_video_refresh_t sendFrame)
 	{
-		_console->GetVideoRenderer()->SetVideoCallback(sendFrame);
+		_videoCallback = sendFrame;
 	}
 
 	RETRO_API void retro_set_audio_sample(retro_audio_sample_t sendAudioSample)
@@ -236,17 +254,17 @@ extern "C" {
 
 	RETRO_API void retro_set_audio_sample_batch(retro_audio_sample_batch_t audioSampleBatch)
 	{
-		_console->GetSoundMixer()->SetSendAudioSample(audioSampleBatch);
+		_audioCallback = audioSampleBatch;
 	}
 
 	RETRO_API void retro_set_input_poll(retro_input_poll_t pollInput)
-	{	
-		_keyManager->SetPollInput(pollInput);
+	{
+		_pollInput = pollInput;
 	}
 
 	RETRO_API void retro_set_input_state(retro_input_state_t getInputState)
 	{
-		_keyManager->SetGetInputState(getInputState);
+		_getInputState = getInputState;
 	}
 
 	RETRO_API void retro_reset()
