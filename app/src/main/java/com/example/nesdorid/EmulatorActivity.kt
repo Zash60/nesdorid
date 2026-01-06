@@ -2,6 +2,7 @@ package com.example.nesdorid
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.util.Log
@@ -32,7 +33,7 @@ class EmulatorActivity : AppCompatActivity() {
     private var romUriString: String? = null
     private val choreographer = Choreographer.getInstance()
     private var isEmulating = false
-    private val frameCallback = Choreographer.FrameCallback { frameTimeNanos ->
+    private val frameCallback: Choreographer.FrameCallback = Choreographer.FrameCallback { frameTimeNanos ->
         if (isEmulating) {
             glSurfaceView.requestRender()
             choreographer.postFrameCallback(frameCallback)
