@@ -42,12 +42,8 @@ jobs:
       with:
         cache-read-only: ${{ github.event_name == 'pull_request' }}
 
-    - name: Build debug APK with retry
-      uses: nick-invision/retry@v3
-      with:
-        timeout_minutes: 10
-        max_attempts: 3
-        command: ./gradlew assembleDebug
+    - name: Build debug APK
+      run: ./gradlew assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4

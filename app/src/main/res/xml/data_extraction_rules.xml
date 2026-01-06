@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- TODO: Use <include> for android:fullBackupContent and -->
+        <!-- <exclude> for android:fullBackupContentExclude -->
+    </cloud-backup>
+    <!-- Device transfers (e.g. to a new device or Google account) -->
+    <device-transfer>
+        <!-- TODO: Use <include> for android:dataExtractionRules and -->
+        <!-- <exclude> for android:dataExtractionRules -->
+    </device-transfer>
+</data-extraction-rules>
