@@ -33,10 +33,12 @@ class EmulatorActivity : AppCompatActivity() {
     private var romUriString: String? = null
     private val choreographer = Choreographer.getInstance()
     private var isEmulating = false
-    private val frameCallback: Choreographer.FrameCallback = Choreographer.FrameCallback { frameTimeNanos ->
-        if (isEmulating) {
-            glSurfaceView.requestRender()
-            choreographer.postFrameCallback(frameCallback)
+    private val frameCallback = object : Choreographer.FrameCallback {
+        override fun doFrame(frameTimeNanos: Long) {
+            if (isEmulating) {
+                glSurfaceView.requestRender()
+                choreographer.postFrameCallback(this)
+            }
         }
     }
 
